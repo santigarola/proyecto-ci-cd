@@ -1,0 +1,23 @@
+# .github/workflows/prod.yml
+name: CD - Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy to production server
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.IP_DEL_SERVIDOR }}
+        username: ${{ secrets.USUARIO_SERVIDOR }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd ~/lemp-sites/santi_garola/prod
+          git checkout main
+          git pull origin main

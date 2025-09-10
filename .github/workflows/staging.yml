@@ -1,0 +1,26 @@
+# .github/workflows/staging.yml
+name: CD - Staging
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to Staging Server
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.IP_DEL_SERVIDOR }}
+        username: ${{ secrets.USUARIO_SERVIDOR }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd ~/lemp-sites/santi_garola/staging
+          git checkout develop
+          git pull origin develop
