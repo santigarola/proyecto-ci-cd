@@ -18,3 +18,4 @@ Para validar que todo funciona:
 1. Push a `main` dispara CI y CD.
 2. El servidor refleja los cambios automáticamente.
 3. Los archivos de prueba `.test.js` confirman que el código funciona.
+Prueba staging
